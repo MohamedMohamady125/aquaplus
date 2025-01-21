@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/profile/profile_screen.dart';
+import 'screens/settings/settings_screen.dart';
+import 'screens/login/login_screen.dart';
+import 'screens/register/register_screen.dart'; // Import RegisterScreen
 
-//et8ayar 22
-void main() => runApp(MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('welcome to aqua plus'),
-          centerTitle: true,
-          backgroundColor: Colors.lightBlue,
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'AquaPlus',
+      theme: ThemeData(
+        primarySwatch: Colors.teal, // Aqua blue theme
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.teal,
+        ).copyWith(
+          secondary: Color.fromARGB(255, 23, 192, 230), // Aqua blue
         ),
-        body: Center(
-          child: Text(
-            'hello',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 2.0,
-              color: Colors.blue[600]!,
-              fontFamily: 'Inter',
-            ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('Button Pressed'); // Add any action here
-          },
-          child: Text('press'),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black), // Updated to bodyMedium
         ),
       ),
-    ));
+      initialRoute: '/login', // Start with the login page
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/register': (context) =>
+            const RegisterScreen(), // Add RegisterScreen route
+      },
+    );
+  }
+}
